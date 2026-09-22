@@ -81,6 +81,14 @@ embedded relative RPATH for the libraries in `/opt/llama.cpp/lib`.
 `LD_LIBRARY_PATH=/opt/llama.cpp/lib` or `LLAMA_CPP_LIB_PATH` globally and do
 not add this directory to `ld.so.conf`.
 
+### Build-time CUDA library detection
+
+CUDA 13 Python wheels share `nvidia/cu13/lib`, while older wheels use
+per-package directories such as `nvidia/cuda_runtime/lib` and
+`nvidia/cublas/lib`. The Dockerfile registers discovered NVIDIA library
+directories with `ldconfig` and checks for `libcudart`, `libcublas` and
+`libnccl` files. This check does not load CUDA or require a GPU/driver.
+
 ### Optimised
 
 | Architecture | Compute Capability | Native Build Target | Examples |

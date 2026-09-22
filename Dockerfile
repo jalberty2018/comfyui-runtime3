@@ -64,7 +64,7 @@ from pathlib import Path
 import site
 import sys
 
-required_packages = ("cuda_runtime", "cublas", "nccl")
+required_libraries = ("libcudart.so*", "libcublas.so*", "libnccl.so*")
 site_packages = {
     Path(path)
     for path in (*site.getsitepackages(), *sys.path)
@@ -77,13 +77,19 @@ library_dirs = {
     if library_dir.is_dir()
 }
 
+# CUDA 13 wheels share nvidia/cu13/lib; older wheels use per-package dirs.
+# Inspect library files without loading them or requiring a GPU/driver.
 missing = [
-    package
-    for package in required_packages
-    if not any(path.parts[-3:-1] == ("nvidia", package) for path in library_dirs)
+    pattern
+    for pattern in required_libraries
+    if not any(
+        library.is_file()
+        for directory in library_dirs
+        for library in directory.glob(pattern)
+    )
 ]
 if missing:
-    raise RuntimeError(f"Missing NVIDIA library directories: {', '.join(missing)}")
+    raise RuntimeError(f"Missing NVIDIA shared libraries: {', '.join(missing)}")
 
 config = "\n".join(str(path) for path in sorted(library_dirs)) + "\n"
 Path("/etc/ld.so.conf.d/python-nvidia.conf").write_text(config)
