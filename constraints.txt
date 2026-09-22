@@ -1,0 +1,20 @@
+# Core numerics
+numpy<2
+
+# ONNX Runtime (GPU only)
+onnxruntime-gpu==1.22.*
+onnxruntime==0
+
+# Attention / performance libs
+flash-attn==2.8.4
+llama-cpp-python==0.3.35
+sageattention==2.2.0
+
+# CLI dependency (hf)
+typer==0.21.1
+
+# Dependency required by typer
+click==8.*
+
+# Huggingface
+huggingface_hub>=1.24.0
