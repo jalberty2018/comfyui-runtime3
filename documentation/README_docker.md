@@ -6,7 +6,7 @@
 - This image does not start any services; use `ls250824/run-x` for that.
 - Based on [`ls250824/pytorch-cuda-ubuntu-runtime:22092026`](https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-runtime/tags?name=22092026).
 - That base image already integrates the official `pytorch/pytorch:2.12.1-cuda13.0-cudnn9-runtime` image; do not install PyTorch or CUDA again in this image.
-- Includes native llama.cpp `b10218` and `llama-cpp-python` `0.3.35` as
+- Includes native llama.cpp `b11115` and `llama-cpp-python` `0.3.35` as
   separate installations so their shared libraries cannot override each other.
 
 ## Websites
@@ -42,7 +42,7 @@
 | Triton    | `3.7.1`              |
 | onnxruntime-gpu | `1.22.*`     |
 | ComfyUI | `0.37.0` |
-| Native llama.cpp | `b10218` |
+| Native llama.cpp | `b11115` |
 | CodeServer | `latest`          |
 
 The PyTorch, torchvision, torchaudio, Triton and CUDA versions above match the
