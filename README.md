@@ -5,7 +5,7 @@
 ## Information
 
 - Docker base image for ComfyUI inference with GPU (CUDA) acceleration.
-- Includes ComfyUI `0.37.0`.
+- Includes ComfyUI `0.38.0`.
 - CUDA 13.0 support
 - Includes native llama.cpp `b10218` for CUDA 13.0 and `llama-cpp-python`
   `0.3.35` as separate installations.
