@@ -97,7 +97,7 @@ PY
 RUN ldconfig
 
 # ComfyUI release version
-ARG COMFYUI_VERSION=v0.38.0
+ARG COMFYUI_VERSION=v0.39.0
 
 # Clone ComfyUI
 RUN --mount=type=cache,target=/root/.cache/git \
@@ -125,7 +125,7 @@ COPY --chmod=755 civitai_red_environment.py /usr/local/bin/civitai_red
 COPY THIRD_PARTY_NOTICES.md MODEL_USAGE.md /usr/share/doc/comfyui-runtime3/
 
 # Labels
-LABEL org.opencontainers.image.title="Base image ComfyUI 0.38.0 + code-server + downloaders" \
+LABEL org.opencontainers.image.title="Base image ComfyUI 0.39.0 + code-server + downloaders" \
       org.opencontainers.image.description="ComfyUI + flash-attn + native llama.cpp + llama-cpp-python + sageattention + onnxruntime-gpu + torch_generic_nms + code-server + civitai downloader + huggingface_hub" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/comfyui-runtime3" \
       org.opencontainers.image.licenses=""
