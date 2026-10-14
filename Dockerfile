@@ -114,6 +114,18 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Set working directory
 WORKDIR /
 
+# NVIDIA VFX custom nodes. Install prebuilt bindings without loading CUDA;
+# the GPU and host driver are only required when executing effects on the pod.
+RUN git clone --depth=1 \
+    https://github.com/Comfy-Org/ComfyUI_Nvidia_VFX_Nodes.git \
+    /ComfyUI/custom_nodes/ComfyUI_Nvidia_VFX_Nodes
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
+        --extra-index-url https://pypi.nvidia.com \
+        --only-binary=nvidia-vfx \
+        -r /ComfyUI/custom_nodes/ComfyUI_Nvidia_VFX_Nodes/requirements.txt
+
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
@@ -126,7 +138,7 @@ COPY THIRD_PARTY_NOTICES.md MODEL_USAGE.md /usr/share/doc/comfyui-runtime3/
 
 # Labels
 LABEL org.opencontainers.image.title="Base image ComfyUI 0.40.0 + code-server + downloaders" \
-      org.opencontainers.image.description="ComfyUI + flash-attn + native llama.cpp + llama-cpp-python + sageattention + onnxruntime-gpu + torch_generic_nms + code-server + civitai downloader + huggingface_hub" \
+      org.opencontainers.image.description="ComfyUI + NVIDIA VFX nodes + flash-attn + native llama.cpp + llama-cpp-python + sageattention + onnxruntime-gpu + torch_generic_nms + code-server + civitai downloader + huggingface_hub" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/comfyui-runtime3" \
       org.opencontainers.image.licenses=""
 
@@ -149,9 +161,14 @@ packages = (
     "triton",
     "llama-cpp-python",
     "onnxruntime-gpu",
+    "nvidia-vfx",
 )
 for package in packages:
     print(f"{package}: {metadata.version(package)}")
+
+vfx_node = Path("/ComfyUI/custom_nodes/ComfyUI_Nvidia_VFX_Nodes/__init__.py")
+if not vfx_node.is_file():
+    raise RuntimeError(f"Missing NVIDIA VFX custom node: {vfx_node}")
 
 executables = (
     Path("/opt/llama.cpp/bin/llama-cli"),

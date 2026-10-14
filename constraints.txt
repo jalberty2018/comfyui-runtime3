@@ -10,6 +10,9 @@ flash-attn==2.8.4
 llama-cpp-python==0.3.35
 sageattention==2.2.0
 
+# NVIDIA VFX SDK bindings (prebuilt Linux wheel)
+nvidia-vfx==0.2.0.0
+
 # CLI dependency (hf)
 typer==0.21.1
 

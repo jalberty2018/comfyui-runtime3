@@ -7,6 +7,8 @@
 - Docker base image for ComfyUI inference with GPU (CUDA) acceleration.
 - Includes ComfyUI `0.40.0`.
 - CUDA 13.0 support
+- Includes NVIDIA VFX custom nodes for super resolution, HDR conversion and
+  frame generation, with `nvidia-vfx==0.2.0.0`.
 - Includes native llama.cpp `b10218` for CUDA 13.0 and `llama-cpp-python`
   `0.3.35` as separate installations.
 - This image does not start any services; use `ls250824/run-x` for that.
@@ -64,6 +66,14 @@ docker build --platform linux/amd64 -t ls250824/comfyui-runtime3:<tag> ./comfyui
 ```
 
 Run this command from the parent directory of `comfyui-runtime3`.
+
+NVIDIA VFX bindings are installed from a prebuilt wheel during the CPU build.
+Build checks inspect package metadata and node files without importing `nvvfx`
+or running effects. On RunPod, use a supported NVIDIA GPU and a host driver
+compatible with CUDA 13. Frame generation requires RTX 40-series or newer.
+Derived images inherit `/ComfyUI/custom_nodes/ComfyUI_Nvidia_VFX_Nodes` and do
+not need to clone this extension again. Rebuild them against the new runtime tag.
+See the [upstream requirements](https://github.com/Comfy-Org/ComfyUI_Nvidia_VFX_Nodes#requirements).
 
 You can build and push the image to Docker Hub using the `build_docker.py` script.
 
