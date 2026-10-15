@@ -67,6 +67,10 @@ docker run --rm --gpus all ls250824/comfyui-runtime3:<tag> \
 | llama-cpp-python | `0.3.35` |
 | sageattention  |  `2.2.0`   |
 | torch_generic_nms | `0.1` |
+| nvidia-vfx | `0.2.0.0` |
+
+The ComfyUI [custom nodes](https://github.com/Comfy-Org/ComfyUI_Nvidia_VFX_Nodes)  for nvidia-vfx are included in this image.
+
 
 ### Native llama.cpp
 
@@ -95,7 +99,7 @@ directories with `ldconfig` and checks for `libcudart`, `libcublas` and
 |---|---:|---:|---|
 | Ampere | 8.6 | `sm_86` | RTX 3090, RTX A5000, RTX A6000, A40 |
 | Ada Lovelace | 8.9 | `sm_89` | RTX 4090, RTX 6000 Ada, L40, L40S |
-| Blackwell | 12.0 | `sm_120` | RTX 5090, RTX PRO 6000 |
+| Blackwell | 12.0 | `sm_120` | RTX 5090, RTX PRO 6000, PRO 6000 MiG |
 
 ## Build Constraints (`/constraints.txt`)
 
