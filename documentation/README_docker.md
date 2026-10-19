@@ -41,7 +41,7 @@
 | cuDNN     | `9`                  |
 | Triton    | `3.7.1`              |
 | onnxruntime-gpu | `1.22.*`     |
-| ComfyUI | `0.41.2` |
+| ComfyUI | `0.42.1` |
 | Native llama.cpp | `b11115` |
 | CodeServer | `latest`          |
 
@@ -70,7 +70,6 @@ docker run --rm --gpus all ls250824/comfyui-runtime3:<tag> \
 | nvidia-vfx | `0.2.0.0` |
 
 The ComfyUI [custom nodes](https://github.com/Comfy-Org/ComfyUI_Nvidia_VFX_Nodes)  for nvidia-vfx are included in this image.
-
 
 ### Native llama.cpp
 

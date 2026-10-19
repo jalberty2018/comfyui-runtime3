@@ -5,7 +5,7 @@
 ## Information
 
 - Docker base image for ComfyUI inference with GPU (CUDA) acceleration.
-- Includes ComfyUI `0.41.2`.
+- Includes ComfyUI `0.42.1`.
 - CUDA 13.0 support
 - Includes NVIDIA VFX custom nodes for super resolution, HDR conversion and
   frame generation, with `nvidia-vfx==0.2.0.0`.

@@ -97,7 +97,7 @@ PY
 RUN ldconfig
 
 # ComfyUI release version
-ARG COMFYUI_VERSION=v0.41.2
+ARG COMFYUI_VERSION=v0.42.1
 
 # Clone ComfyUI
 RUN --mount=type=cache,target=/root/.cache/git \
@@ -111,20 +111,23 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
         -r requirements.txt
 
-# Set working directory
-WORKDIR /
+# ComfyUI/custom_nodes
+WORKDIR /ComfyUI/custom_nodes/
 
 # NVIDIA VFX custom nodes. Install prebuilt bindings without loading CUDA;
 # the GPU and host driver are only required when executing effects on the pod.
 RUN git clone --depth=1 \
     https://github.com/Comfy-Org/ComfyUI_Nvidia_VFX_Nodes.git \
-    /ComfyUI/custom_nodes/ComfyUI_Nvidia_VFX_Nodes
+    ComfyUI_Nvidia_VFX_Nodes
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
         --extra-index-url https://pypi.nvidia.com \
         --only-binary=nvidia-vfx \
-        -r /ComfyUI/custom_nodes/ComfyUI_Nvidia_VFX_Nodes/requirements.txt
+        -r ComfyUI_Nvidia_VFX_Nodes/requirements.txt
+
+# Set working directory
+WORKDIR /
 
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
@@ -137,7 +140,7 @@ COPY --chmod=755 civitai_red_environment.py /usr/local/bin/civitai_red
 COPY THIRD_PARTY_NOTICES.md MODEL_USAGE.md /usr/share/doc/comfyui-runtime3/
 
 # Labels
-LABEL org.opencontainers.image.title="Base image ComfyUI 0.41.2 + code-server + downloaders" \
+LABEL org.opencontainers.image.title="Base image ComfyUI 0.42.1 + code-server + downloaders" \
       org.opencontainers.image.description="ComfyUI + NVIDIA VFX nodes + flash-attn + native llama.cpp + llama-cpp-python + sageattention + onnxruntime-gpu + torch_generic_nms + code-server + civitai downloader + huggingface_hub" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/comfyui-runtime3" \
       org.opencontainers.image.licenses=""
