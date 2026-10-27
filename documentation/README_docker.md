@@ -41,7 +41,7 @@
 | cuDNN     | `9`                  |
 | Triton    | `3.7.1`              |
 | onnxruntime-gpu | `1.22.*`     |
-| ComfyUI | `0.42.1` |
+| ComfyUI | `0.43.0` |
 | Native llama.cpp | `b11115` |
 | CodeServer | `latest`          |
 
@@ -75,7 +75,7 @@ The ComfyUI [custom nodes](https://github.com/Comfy-Org/ComfyUI_Nvidia_VFX_Nodes
 
 The wheels and native archive are downloaded from
 [LS110824/attentions-llama-cuda130](https://huggingface.co/LS110824/attentions-llama-cuda130).
-The native archive is `llama-cpp-b10218-cu130-linux-x86_64.tar.gz`.
+The native archive is `llama-cpp-b11115-cu130-linux-x86_64.tar.gz`.
 The image installs it under `/opt/llama.cpp`. The included commands, such as `llama-cli`, `llama-server`, and `llama-bench`, are available through `PATH`.
 
 The archive is built for CUDA 13.0 on Linux `x86_64`. Its binaries use an
