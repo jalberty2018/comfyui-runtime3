@@ -41,7 +41,7 @@
 | cuDNN     | `9`                  |
 | Triton    | `3.7.1`              |
 | onnxruntime-gpu | `1.22.*`     |
-| ComfyUI | `0.44.0` |
+| ComfyUI | `0.45.0` |
 | Native llama.cpp | `b11115` |
 | CodeServer | `latest`          |
 
